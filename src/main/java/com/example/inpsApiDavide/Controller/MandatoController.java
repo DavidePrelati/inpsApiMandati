@@ -3,8 +3,11 @@ package com.example.inpsApiDavide.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +25,11 @@ public class MandatoController {
 	public List<Mandato> recuperoMandatiAttesaAttivazione(){
 		return mandatoService.mandatiAttesaAttivazione();
 	}
+	
+	@PostMapping("/verifica")
+    public boolean verifica(@RequestBody String codiceFiscale) {
+        return mandatoService.mandatiPerCFTrueFalse(codiceFiscale);
+    }
 	
 	@GetMapping("/attesa-attivazione/cf/{codice_fiscale}")
 	public List<Mandato> recuperoMandatiPerCodiceFiscale(@PathVariable String codice_fiscale) {

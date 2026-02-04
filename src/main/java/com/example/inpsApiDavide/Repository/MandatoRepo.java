@@ -10,6 +10,8 @@ public interface MandatoRepo extends JpaRepository<Mandato, String>{
 
 	List<Mandato> findByCodiceFiscale(String codice_fiscale);
 	
+	boolean existsByCodiceFiscaleTrue (String codice_fiscale);
+	
     List<Mandato> findByDataInizioAttivazioneStartingWith(String data_inizio_attivazione);
     
     List<Mandato> findByDataAttivazioneStartingWith(String data_attivazione);

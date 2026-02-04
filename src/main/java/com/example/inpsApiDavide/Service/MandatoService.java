@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.inpsApiDavide.Model.Mandato;
 import com.example.inpsApiDavide.Repository.MandatoRepo;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class MandatoService {
 
@@ -22,6 +24,14 @@ public class MandatoService {
 	
 	public List<Mandato> mandatiAttesaAttivazionePerCf(String codiceFiscale) {
 		return mandatoRepo.findByCodiceFiscale(codiceFiscale);
+	}
+	
+	public boolean mandatiPerCFTrueFalse(String codiceFiscale) {
+		if(!mandatoRepo.existsByCodiceFiscaleTrue(codiceFiscale)) {
+			throw new EntityNotFoundException("Codice non trovato");
+		}
+		
+		return mandatoRepo.existsByCodiceFiscaleTrue(codiceFiscale); 
 	}
 	
 	public List<Mandato> mandatiAttesaAttivazionePerDataIniAtt(String dataInizioAttivazione){	
